@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t vyeruva/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t reddyshack/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true vyeruva/react-test npm run test
+  - docker run -e CI=true reddyshack/react-test npm run test
 
 after_success:
-  - docker build -t vyeruva/multi-client ./client
-  - docker build -t vyeruva/multi-nginx ./nginx
-  - docker build -t vyeruva/multi-server ./server
-  - docker build -t vyeruva/multi-worker ./worker
+  - docker build -t reddyshack/multi-client ./client
+  - docker build -t reddyshack/multi-nginx ./nginx
+  - docker build -t reddyshack/multi-server ./server
+  - docker build -t reddyshack/multi-worker ./worker
   # Log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push to dockerhub
-  - docker push vyeruva/multi-client
-  - docker push vyeruva/multi-nginx
-  - docker push vyeruva/multi-server
-  - docker push vyeruva/multi-worker
+  - docker push reddyshack/multi-client
+  - docker push reddyshack/multi-nginx
+  - docker push reddyshack/multi-server
+  - docker push reddyshack/multi-worker
